@@ -44,14 +44,20 @@ const selectItem = (event, img) => {
   if (item === -1) {
     sliders.push(img);
   } else {
-    alert('Hey, Already added !')
+    sliders.pop(img);
+    element.classList.remove('added');
   }
 }
-var timer
+var timer;
 const createSlider = () => {
+  const duration = document.getElementById('duration').value || 1 ;
   // check slider image length
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
+    return;
+  }
+  if(duration < 0){
+    alert('slide duration can not be negative value')
     return;
   }
   // crate slider previous next area
@@ -67,7 +73,6 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  const duration = document.getElementById('duration').value || 1000;
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -80,7 +85,8 @@ const createSlider = () => {
   timer = setInterval(function () {
     slideIndex++;
     changeSlide(slideIndex);
-  }, duration);
+  }, (duration*1000));
+  
 }
 
 // change slider index 
@@ -109,8 +115,8 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-searchBtn.addEventListener('click', function (e) {
-  e.preventDefault();
+searchBtn.addEventListener('click', function (event) {
+  event.preventDefault();
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
