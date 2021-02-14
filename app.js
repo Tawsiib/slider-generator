@@ -109,7 +109,8 @@ const changeSlide = (index) => {
   items[index].style.display = "block"
 }
 
-searchBtn.addEventListener('click', function () {
+searchBtn.addEventListener('click', function (e) {
+  e.preventDefault();
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
