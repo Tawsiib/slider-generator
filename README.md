@@ -1,1 +1,1 @@
-# slider-generator
+## Fixing slider issues with debugger tools
